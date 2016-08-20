@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# this script is for running on remote (test) machine
+# use ssh user@host bash -s < run-remote.sh to launch
+
 set -e
 
 function SetVariables {
