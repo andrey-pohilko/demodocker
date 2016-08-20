@@ -1,0 +1,8 @@
+version: '2'
+services:
+  srv1:
+    build: ../srv1
+    image: pylibs-srv1
+  srv2:
+    build: ../srv2
+    image: pylibs-srv2
