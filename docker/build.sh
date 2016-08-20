@@ -1,25 +1,42 @@
 #!/bin/bash
 set -e
 
-echo "Copying dependencies "
-for mod in ../srv*; do
-  if [ -d "${mod}" ]; then
-    rm -rf ${mod}/modules
-  fi
-  cp -R ../modules ${mod}
-done
+function SetVariables {
+  export dist_dir=../dist
+}
 
-docker build -t pylibs:1.0.0 .
+function CopySharedLib {
+  echo "Copying dependencies "
+  for mod in ../srv*; do
+    if [ -d "${mod}" ]; then
+      rm -rf ${mod}/modules
+    fi
+    cp -R ../modules ${mod}
+  done
+}
 
-docker-compose up
+function BuildDockers {
+ docker build -t pylibs:1.0.0 .
+ docker-compose build
+}
 
-export dist_dir=../dist
-
-function save_docker {
+function SaveDocker {
   docker save $1 | gzip - -f > ${dist_dir}/$1.tar.gz
 }
 
-echo "Saving and gzipping docker files"
-for mod in ../srv*; do
-  save_docker pylibs-${mod##*/}
-done
+function SaveDockers {
+  echo "Saving and gzipping docker files"
+  for mod in ../srv*; do
+    SaveDocker pylibs-${mod##*/}
+  done
+}
+
+function CopyToRemote {
+  ssh andrey@localhost bash -s < run-remote.sh
+}
+
+SetVariables
+CopySharedLib
+BuildDockers
+SaveDockers
+CopyToRemote

@@ -1,10 +1,8 @@
 version: '2'
 services:
   pylibs-srv1:
-    build: ../srv1
     image: pylibs-srv1
     command: python mod1.py
   pylibs-srv2:
-    build: ../srv2
     image: pylibs-srv2
     command: python mod2.py
