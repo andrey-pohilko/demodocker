@@ -2,10 +2,10 @@
 version: '2'
 services:
   srv1:
-#      build: ../srv1
+    build: ../srv1
     image: pylibs-srv1
-	command: python /app/mod1.py
+#  	command: python /app/mod1.py
   srv2:
-#      build: ../srv2
+    build: ../srv2
     image: pylibs-srv2
-	command: python /app/mod2.py
+#  	command: python /app/mod2.py

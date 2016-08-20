@@ -1,9 +1,0 @@
-version: '2'
-services:
-  mod1:
-    image: pylibs-srv1
-    command: python /app/mod1.py
-
-  mod2:
-    image: pylibs-srv2
-    command: python /app/mod2.py

@@ -3,8 +3,16 @@ services:
   pylibs-srv1:
     build: ../srv1
     image: pylibs-srv1
+<<<<<<< HEAD
     command: python mod1.py
   pylibs-srv2:
     build: ../srv2
     image: pylibs-srv2
     command: python mod2.py
+=======
+	command: python /app/mod1.py
+  srv2:
+    build: ../srv2
+    image: pylibs-srv2
+	command: python /app/mod2.py
+>>>>>>> created docker-compose.yml.source and putcompose.py
