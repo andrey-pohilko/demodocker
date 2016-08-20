@@ -16,6 +16,7 @@ function CopySharedLib {
 }
 
 function BuildDockers {
+ python putcompose.py
  docker build -t pylibs:1.0.0 .
  docker-compose build
 }
