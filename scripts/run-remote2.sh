@@ -18,7 +18,10 @@
 set -e
 
 function SetVariables {
-  export local_folder=/home/andrey/docker.remote
+  export local_folder=/home/andrey/docker
+  export git_folder=${local_folder}/demodocker
+  export docker_folder=${git_folder}/docker
+  export git_origin=https://github.com/andrey-pohilko/demodocker.git
   export ci_machine=andrey@localhost
   export ci_dist_folder=/home/andrey/docker/demodocker/dist
   export ci_docker_folder=/home/andrey/docker/demodocker/docker
@@ -28,8 +31,16 @@ function SetVariables {
 
 function CopyFiles {
   echo "Copying files to remote machine"
-  scp ${ci_machine}:${ci_dist_folder}/* ${local_folder}
-  scp ${ci_machine}:${ci_compose_file} ${local_compose_file}
+  if [ ! -d "${local_folder}" ]; then
+    mkdir ${local_folder}
+  fi
+  
+  if [ ! -d "${git_folder}" ]; then
+     git clone ${git_origin}
+  fi
+  
+  cd ${git_folder}
+  git pull  
 }
 
 function RemoveOldDockers {
@@ -44,6 +55,11 @@ function LoadDockers {
     echo ${f}
     gunzip -c ${f} | docker load
   done
+}
+
+function BuildDockers {
+  cd ${docker_folder}
+  echo "we will build dockers on here"
 }
 
 function RunDockers {
