@@ -6,7 +6,7 @@ function SetVariables {
   export home_dir=/home/andrey/docker/demodocker
   export dist_dir=${home_dir}/dist
 #  export HOME=/var/lib/jenkins
-  export remote_host=andrey@localhost
+  export remote_host=andrey@192.168.0.108
   export docker_dir=${home_dir}/docker
   export scripts_dir=${home_dir}/scripts
 }
@@ -43,11 +43,15 @@ function SaveDockers {
 
 function CopyToRemote {
   # first run ssh ${remote_host}, ssh-keygen and ssh-copy-id manually 
-  ssh ${remote_host} bash -s < ${scripts_dir}/run-remote.sh
+  # changed script to run-remote2.sh - it will build and run dockers on remote machine
+  ssh ${remote_host} bash -s < ${scripts_dir}/run-remote2.sh
 }
 
 SetVariables
 CopySharedLib
-BuildDockers
+
+# BuildDocker is not necessary on local (ci) machine. 
+# Instead dockers will be built and run on remote (demo or test) machine
+# BuildDockers
 SaveDockers
 CopyToRemote

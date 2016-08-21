@@ -3,7 +3,7 @@
 # this script is for running on remote (test) machine
 # use ssh user@host bash -s < run-remote.sh to launch
 
-# this scripts works the following way:
+# run-remote.sh works the following way:
 #  copy zipped docker files to remote machine
 #  unpack and load to docker
 #  run docker files
@@ -60,6 +60,9 @@ function LoadDockers {
 function BuildDockers {
   cd ${docker_folder}
   echo "we will build dockers on here"
+ docker build -t pylibs:1.0.0 .
+ docker-compose build
+
 }
 
 function RunDockers {
