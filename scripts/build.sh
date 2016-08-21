@@ -19,6 +19,7 @@ function CopySharedLib {
     fi
     cp -R ${home_dir}/modules ${mod}
   done
+  #TODO: add git push 
 }
 
 function BuildDockers {
@@ -44,14 +45,18 @@ function SaveDockers {
 function CopyToRemote {
   # first run ssh ${remote_host}, ssh-keygen and ssh-copy-id manually 
   # changed script to run-remote2.sh - it will build and run dockers on remote machine
+  echo "Running remote script"
   ssh ${remote_host} bash -s < ${scripts_dir}/run-remote2.sh
 }
 
 SetVariables
-CopySharedLib
+# copy shared lib must be now done on developer's machine. 
+# developer will make changes, copy shared lib to all dependent modules
+# and then commit changes to repository
+#CopySharedLib
 
 # BuildDocker is not necessary on local (ci) machine. 
 # Instead dockers will be built and run on remote (demo or test) machine
 # BuildDockers
-SaveDockers
+# SaveDockers
 CopyToRemote

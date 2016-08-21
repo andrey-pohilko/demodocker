@@ -60,8 +60,8 @@ function LoadDockers {
 function BuildDockers {
   cd ${docker_folder}
   echo "we will build dockers on here"
- docker build -t pylibs:1.0.0 .
- docker-compose build
+  docker build -t pylibs:1.0.0 .
+  docker-compose build
 
 }
 
@@ -73,5 +73,5 @@ function RunDockers {
 SetVariables
 CopyFiles
 cd ${local_folder}
-LoadDockers
+BuildDockers
 RunDockers
