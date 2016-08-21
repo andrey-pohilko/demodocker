@@ -26,6 +26,8 @@ function BuildDockers {
  python ${scripts_dir}/putcompose.py
  docker build -t pylibs:1.0.0 .
  docker-compose build
+ echo "Removing untagged docker images" 
+ docker rmi $(docker images -f "dangling=true" -q) || true
 }
 
 function SaveDocker {
