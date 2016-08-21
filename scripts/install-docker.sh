@@ -17,9 +17,11 @@ echo deb https://apt.dockerproject.org/repo ubuntu-xenial main > /etc/apt/source
 apt-get update
 apt-get purge lxc-docker
 apt-cache policy docker-engine
+apt-get -y install curl
 
 echo_message adding $DOCKER_USERNAME to docker group. Logout and login to apply changes
-sudo usermod -aG docker $DOCKER_USERNAME
+addgroup docker
+usermod -aG docker $DOCKER_USERNAME
 
 echo_message installing docker-engine
 apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual
