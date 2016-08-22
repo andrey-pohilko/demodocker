@@ -1,4 +1,4 @@
 import mycommon
 
-print "mod1 running after few changes"
+print "mod1 here (is docker rebuilt?)"
 mycommon.commonfunc("mod1")

@@ -1,4 +1,4 @@
 def commonfunc (arg):
   print "This is a call from library. Arg given: {}".format(arg)
-  print "Empy line"
+  print "Empty line changed"
 

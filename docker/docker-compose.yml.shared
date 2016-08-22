@@ -1,0 +1,21 @@
+# this file shows how to create two files with single
+# shared modules library
+# note:
+# - if you change any code in /modules (outside the dockers),
+#   it will be applied immediately without rebuilding dockers
+# - if you change any code inside dockers (../srv1 or ../srv2),
+#   you have to explicitly run docker-compose build to apply changes
+version: '2'
+services:
+  srv1:
+    build: ../srv1
+    image: pylibs-srv1
+    command: python /app/mod1.py
+    volumes:
+     - /home/andrey/docker/demodocker/modules:/modules
+  srv2:
+    build: ../srv2
+    image: pylibs-srv2
+    command: python /app/mod2.py
+    volumes:
+     - /home/andrey/docker/demodocker/modules:/modules

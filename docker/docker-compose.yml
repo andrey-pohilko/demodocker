@@ -4,7 +4,11 @@ services:
     build: ../srv1
     image: pylibs-srv1
     command: python /app/mod1.py
+    volumes:
+     - /home/andrey/docker/demodocker/modules:/modules
   srv2:
     build: ../srv2
     image: pylibs-srv2
     command: python /app/mod2.py
+    volumes:
+     - /home/andrey/docker/demodocker/modules:/modules
